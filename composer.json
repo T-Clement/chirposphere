@@ -1,0 +1,11 @@
+{
+    "name": "toque/chirposphere",
+    "authors": [
+        {
+            "name": "T-Clement"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

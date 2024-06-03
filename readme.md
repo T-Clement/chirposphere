@@ -1,0 +1,1 @@
+This project have for purposes to learn POO with PHP.
