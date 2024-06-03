@@ -51,9 +51,9 @@ class ChirpRepository implements IChirpRepository {
         ]);
     }
 
-
+    // id à 0 côté vue / controller lors de la soumission du formulaire
     public function newChirp(Chirp $chirp) : Chirp | bool {
-        $query = $this->db->prepare("INSERT INTO chirp (id, author, message, date) VALUES (0, :author, :message, :date");
+        $query = $this->db->prepare("INSERT INTO chirp (author, message, date) VALUES (:author, :message, :date");
         $isOk = $query->execute([
             "author" => htmlspecialchars($chirp->get_author()),
             "message" => htmlspecialchars($chirp->get_message()),

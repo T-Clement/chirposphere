@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chirosphere</title>
-</head>
-<body>
-    <h1>
-        <?php
-        require_once '../config/database.php';
+<?php
 
-        use Repository\ChirpRepository;
+// use App\DIContainer;
+use Controllers\ChirpController;
+use Repository\ChirpRepository;
 
-        $chirpRepository = new ChirpRepository($dbCo);
+require '../config/database.php';
+require_once '../vendor/autoload.php';
 
-        // var_dump($chirpRepository->getAllChirps());
+define('APP_PATH', realpath(__DIR__ . '/../app'));
 
-        var_dump($chirpRepository->getChirp(1));
+$router = new App\Router();
 
-        
-        ?>
-    </h1>
-</body>
-</html>
+$chirpController = new \Controllers\ChirpController(new ChirpRepository($dbCo));
+
+
+$router->addRoute('GET', '/chirposphere/public/index.php/aaa', $chirpController, 'index');
+
+$router->route();

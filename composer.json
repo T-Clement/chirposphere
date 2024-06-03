@@ -14,7 +14,8 @@
             "Controllers\\": "app/Controllers/",
             "Repository\\": "app/Repository/",
             "Interface\\": "app/Interface/",
-            "Views\\": "app/Views/" 
+            "Views\\": "app/Views/",
+            "App\\": "app/"
         }
     }
 
