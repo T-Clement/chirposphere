@@ -8,13 +8,25 @@
 <body>
     <h1>
         <?php
-
         require_once '../config/database.php';
 
+        use Repository\ChirpRepository;
 
-        echo "Coucou" 
-        
-        
+
+        // // Model
+        // require_once "../app/Models/Chirp.php";
+
+        // // Interface
+        // require "../app/Interface/IChirpRepository.php"; 
+
+        // // Repository
+        // require "../app/Repository/ChirpRepository.php";
+
+        $chirpRepository = new ChirpRepository($dbCo);
+
+        // var_dump($chirpRepository->getAllChirps());
+        var_dump($chirpRepository->getChirp(1));
+
         
         ?>
     </h1>

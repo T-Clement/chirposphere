@@ -19,5 +19,5 @@ try {
     die('Unable to connect to the database.
     ' . $e->getMessage());
 }
-// var_dump($dbCo);
+var_dump($dbCo);
 ?>
