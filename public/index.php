@@ -7,7 +7,16 @@
 </head>
 <body>
     <h1>
-        <?php echo "Coucou" ?>
+        <?php
+
+        require_once '../config/database.php';
+
+
+        echo "Coucou" 
+        
+        
+        
+        ?>
     </h1>
 </body>
 </html>
