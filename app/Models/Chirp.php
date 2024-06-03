@@ -20,7 +20,19 @@ class Chirp {
     }
 
 
+    public function get_id() {
+        return $this->id;
+    }
 
+    public function get_author() {
+        return $this->author;
+    }
+    public function get_message() {
+        return $this->message;
+    }
+    public function get_date() {
+        return $this->date;
+    }
 
     
 

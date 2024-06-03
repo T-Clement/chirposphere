@@ -40,7 +40,38 @@ class ChirpRepository implements IChirpRepository {
         ]);
     
         $chirp = $query->fetch();
-        return new Chirp($chirp->id, $chirp->author, $chirp->message, $chirp->date);
+        return new Chirp(...$chirp);
+    }
+
+
+    public function deleteChirp(int $id) : bool {
+        $query = $this->db->prepare("DELETE FROM chirp WHERE id = :id");
+        return $query->execute([
+            "id" => intval($id)
+        ]);
+    }
+
+
+    public function newChirp(Chirp $chirp) : Chirp | bool {
+        $query = $this->db->prepare("INSERT INTO chirp (id, author, message, date) VALUES (0, :author, :message, :date");
+        $isOk = $query->execute([
+            "author" => htmlspecialchars($chirp->get_author()),
+            "message" => htmlspecialchars($chirp->get_message()),
+            "date" => htmlspecialchars($chirp->get_date()->format('Y-m-d H:i:s'))
+        ]);
+
+        if(!$isOk) return false;
+
+        $lastId = $this->db->lastInsertId();
+        $insertedChirp = $this->db->prepare("SELECT * FROM chirp WHERE id = :id");
+        $insertedChirp->execute([
+            'id' => intval($lastId)
+        ]);
+
+        return new Chirp(...$insertedChirp->fetch());
+
+
+
     }
 
 

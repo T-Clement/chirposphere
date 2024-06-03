@@ -12,19 +12,10 @@
 
         use Repository\ChirpRepository;
 
-
-        // // Model
-        // require_once "../app/Models/Chirp.php";
-
-        // // Interface
-        // require "../app/Interface/IChirpRepository.php"; 
-
-        // // Repository
-        // require "../app/Repository/ChirpRepository.php";
-
         $chirpRepository = new ChirpRepository($dbCo);
 
         // var_dump($chirpRepository->getAllChirps());
+
         var_dump($chirpRepository->getChirp(1));
 
         
