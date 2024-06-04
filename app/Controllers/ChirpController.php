@@ -4,7 +4,7 @@ namespace Controllers;
 
 use Repository\ChirpRepository;
 use Views\View;
-
+use Models\Chirp;
 
 class ChirpController
 {
@@ -24,8 +24,21 @@ class ChirpController
     }
 
 
-    public function show(int $id) {
-        
+    public function show($id) 
+    {
+
+
+        // var_dump($id);
+        // var_dump($_SERVER['PHP_SELF']);
+
+        // var_dump("Dans la vue ChirpView");
+
+
+        $chirp = $this->chirpRepository->getChirp($id);
+        // var_dump($chirp);
+        $view = new View('ChirpView.php', ['chirp' => $chirp]);
+        $view->render();
+
     }
 
     public function create() {
@@ -36,7 +49,10 @@ class ChirpController
     }
 
 
-
+    public function edit(int $id) {
+        var_dump($id);
+        var_dump("On est dans l'edit du " . $id);
+    }
 
 
 }

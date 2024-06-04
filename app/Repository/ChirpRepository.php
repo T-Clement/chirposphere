@@ -70,8 +70,6 @@ class ChirpRepository implements IChirpRepository {
 
         return new Chirp(...$insertedChirp->fetch());
 
-
-
     }
 
 

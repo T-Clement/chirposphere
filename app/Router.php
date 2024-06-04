@@ -4,34 +4,60 @@ namespace App;
 
 class Router
 {
-    private $routes = []; // Tableau pour stocker les routes
+    private $routes = []; // rableau pour stocker les routes
+
     public function addRoute($method, $path, $controller, $action)
     {
-        // Ajouter une nouvelle route au tableau
+        // ajouter une nouvelle route au tableau
         $this->routes[] = [
             'method' => $method,
-            'path' => $path,
+            'path' => preg_replace('/:[a-zA-Z0-9]+/', '([a-zA-Z0-9]+)', $path), // Remplacer les paramètres par des expressions régulières
             'controller' => $controller,
-            'action' => $action
+            'action' => $action,
+            'params' => [] // tableau de paramètres matchant le gabarit (ici :id)
         ];
     }
+
     public function route()
     {
-        // Récupérer la méthode HTTP et l'URI de la requête
+        // récupérer la méthode HTTP et l'URI de la requête
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
 
 
-        // Parcourir les routes enregistrées
+
+        // traitement à réaliser avant le de retourner les éléments
+
+        // parcourir les routes enregistrées
+        // foreach ($this->routes as &$route) {
         foreach ($this->routes as $route) {
-            if ($route['method'] == $method && $route['path'] == $uri) {
+            // comparaison method
+            // et récupération des paramètres (éléments matchant :id par exemple) dans un tableau
+            if ($route['method'] == $method && preg_match('#^' . $route['path'] . '$#', $uri, $matches)) {
+                // extraire les paramètres de l'URI
+                array_shift($matches);
+                $route['params'] = $matches;
+
                 $controller = $route['controller'];
                 $action = $route['action'];
-                $controller->$action();
+
+                // var_dump($controller);
+                // var_dump($action);
+
+                // var_dump([$controller, $action]);
+
+                // passer les paramètres à la méthode du contrôleur
+                call_user_func_array([$controller, $action], $route['params']);
                 return;
             }
         }
-        // Si aucune route ne correspond, afficher une erreur
+
+        // si aucune route ne correspond, afficher une erreur
         echo "404 - Page not found";
     }
+
+
+
+    
+    
 }

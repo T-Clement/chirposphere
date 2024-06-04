@@ -6,7 +6,7 @@ use Models\Chirp;
 
 
 interface IChirpRepository {
-    public function getAllChirps();
+    public function getAllChirps() : array | null;
     public function getChirp(int $id) : Chirp | null ;
     public function deleteChirp(int $id) : bool;
     public function newChirp(Chirp $chirp) : Chirp | bool;

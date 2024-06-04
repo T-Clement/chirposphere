@@ -35,5 +35,9 @@ class Chirp {
     }
 
     
+    public static function formatDate (DateTime $date) {
+        return $date->format("d-m-Y");
+    }
+
 
 }
