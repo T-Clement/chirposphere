@@ -14,6 +14,11 @@ $router = new App\Router();
 $chirpController = new \Controllers\ChirpController(new ChirpRepository($dbCo));
 
 
-$router->addRoute('GET', '/chirposphere/public/index.php/aaa', $chirpController, 'index');
+$router->addRoute('GET', '/chirposphere/public/index.php/chirps', $chirpController, 'index');
+
+$router->addRoute('GET', '/chirposphere/public/index.php/chirps/:id', $chirpController, 'show');
+
+$router->addRoute('GET', '/chirposphere/public/index.php/chirps/new', $chirpController, 'create');
+
 
 $router->route();

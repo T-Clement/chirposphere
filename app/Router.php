@@ -21,10 +21,6 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
 
-        // require_once '../config/database.php';
-
-        // var_dump($dbCo);
-
 
         // Parcourir les routes enregistrées
         foreach ($this->routes as $route) {

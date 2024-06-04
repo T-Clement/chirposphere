@@ -5,7 +5,6 @@ namespace Controllers;
 use Repository\ChirpRepository;
 use Views\View;
 
-// require_once '../app/Views/View.php';
 
 class ChirpController
 {
@@ -19,8 +18,25 @@ class ChirpController
     {
         $chirps = $this->chirpRepository->getAllChirps();
 
-        $view = new View('ChirpView.php', ['chirps' => $chirps]);
+        $view = new View('ChirpsView.php', ['chirps' => $chirps]);
         $view->render();
 
     }
+
+
+    public function show(int $id) {
+        
+    }
+
+    public function create() {
+
+        var_dump($_REQUEST);
+        
+        // $chirp = $this->chirpRepository->newChirp
+    }
+
+
+
+
+
 }
