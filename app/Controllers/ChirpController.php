@@ -63,9 +63,31 @@ class ChirpController
     {
         var_dump($_POST);
         $chirpDeleted = $this->chirpRepository->deleteChirp($id);
-        header('Location: /chirosphere/public/index.php/chirps');
+        header('Location: /chirposphere/public/index.php/chirps');
         exit();
 
     }
+
+
+    public function add () {
+        $view = new View("addChirpForm.php", []);
+        $view->render();
+    }
+
+    public function insert() {
+        // var_dump($_POST);
+        // var_dump($data);
+
+        extract($_POST);
+        $formChirp = new Chirp(0, $user, $message, date("Y-m-d H:i:s"));
+        // var_dump($formChirp);
+        $chirpInserted = $this->chirpRepository->newChirp($formChirp);
+
+        $view = new View("ChirpView.php", ["chirp" => $chirpInserted]);
+        $view->render();
+
+
+    }
+
 
 }

@@ -1,6 +1,6 @@
 
 
-<h1>Je suis dans la vue du Chirp !!!! ENFIN</h1>
+<h1>Je suis dans la vue des Chirps !!!!</h1>
 
 <?php 
 // var_dump($chirps);
@@ -8,6 +8,11 @@
 use Models\Chirp;
 
 ?>
+
+<section>
+    <a href="/chirposphere/public/index.php/chirps/new">Ajouter un Chirp</a>
+</section>
+
 
 <section style='display: flex; flex-direction: row; gap: 36px;'>
     
