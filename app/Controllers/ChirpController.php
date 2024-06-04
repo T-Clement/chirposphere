@@ -69,8 +69,8 @@ class ChirpController
     }
 
 
-    public function add () {
-        $view = new View("addChirpForm.php", []);
+    public function add() {
+        $view = new View("addChirpForm.php", ["user" => 1]);
         $view->render();
     }
 

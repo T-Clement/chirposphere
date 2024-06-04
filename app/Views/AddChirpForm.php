@@ -3,8 +3,8 @@
 <form method ="POST" action="/chirposphere/public/index.php/chirps/new">
     <div style='display: block; margin-bottom: 12px;'>
         <label for='user'>Votre id utilisateur</label>
-        <input type='text' id='user' name='user' value='1' disabled/>
-        <input type='hidden' id='user' name='user' value='1'/>
+        <input type='text' id='user' name='user' value=<?= $user ?> disabled/>
+        <input type='hidden' id='user' name='user' value=<?= $user ?>/>
 
     </div>
 
