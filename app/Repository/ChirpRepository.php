@@ -61,7 +61,7 @@ class ChirpRepository implements IChirpRepository {
         $isOk = $query->execute([
             "author" => intval(htmlspecialchars($chirp->get_author())),
             "message" => htmlspecialchars($chirp->get_message()),
-            "date" => $chirp->get_date()->format('Y-m-d H:i:s')
+            "date" => htmlspecialchars($chirp->get_date()->format('Y-m-d H:i:s'))
         ]);
 
         if(!$isOk) return false;
@@ -75,6 +75,36 @@ class ChirpRepository implements IChirpRepository {
         return new Chirp(...$insertedChirp->fetch());
 
     }
+
+
+    public function updateChirp(Chirp $chirp) : Chirp | bool {
+        var_dump($chirp);
+        $query = $this->db->prepare("UPDATE chirp SET author = :author, message = :message, date = :date WHERE id = :id");
+        $isOk = $query->execute([
+            "id" => intval($chirp->get_id()),
+            "author" => $chirp->get_author(),
+            "message" => htmlspecialchars($chirp->get_message()),
+            "date" => htmlspecialchars($chirp->get_date()->format('Y-m-d H:i:s'))
+        ]);
+        
+        if(!$isOk) return false;
+
+        $id = $chirp->get_id();
+        $updatedChirp = $this->db->prepare("SELECT * FROM chirp WHERE id = :id");
+        $updatedChirp->execute([
+            "id" => intval($id)
+        ]);
+
+        $result = $updatedChirp->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return false;
+        }
+    
+        return new Chirp(...array_values($result));
+
+    }
+
 
 
 }

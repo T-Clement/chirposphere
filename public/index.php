@@ -22,6 +22,7 @@ $router->addRoute('POST', '/chirposphere/public/index.php/chirps/new', $chirpCon
 $router->addRoute('GET', '/chirposphere/public/index.php/chirps/:id', $chirpController, 'show');
 
 $router->addRoute('GET', '/chirposphere/public/index.php/chirps/:id/edit', $chirpController, 'edit');
+$router->addRoute('POST', '/chirposphere/public/index.php/chirps/:id/edit', $chirpController, 'edit');
 
 $router->addRoute('DELETE', '/chirposphere/public/index.php/chirps/:id', $chirpController, 'delete');
 

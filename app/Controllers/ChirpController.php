@@ -44,18 +44,29 @@ class ChirpController
     }
 
 
-
-    public function create() 
-    {
-        var_dump($_REQUEST);
-        // $chirp = $this->chirpRepository->newChirp
-    }
-
-
     public function edit(int $id) 
     {
-        var_dump($id);
-        var_dump("On est dans l'edit du " . $id);
+        // var_dump($id);
+        // var_dump("On est dans l'edit du " . $id);
+        // var_dump($_SERVER['REQUEST_METHOD']);
+        if($_SERVER['REQUEST_METHOD'] === "GET") {
+            $chirp = $this->chirpRepository->getChirp($id);
+            $view = new View("UpdateChirpForm.php", ["chirp" => $chirp]);
+            $view->render();
+        } else if($_SERVER['REQUEST_METHOD'] === "POST") {
+            extract($_POST);
+            $updatedChirpForm = new Chirp($id, $user, $message, date("Y-m-d H:i:s"));
+            // var_dump($updatedChirpForm);
+            $chirp = $this->chirpRepository->updateChirp($updatedChirpForm);
+            // $view = new View("ChirpView.php", ["chirp" => $chirp]);
+            // $view->render();
+
+            // var_dump($chirp);
+            
+            header('Location: /chirposphere/public/index.php/chirps/' . $chirp->get_id());
+            exit();
+
+        }
     }
 
 
@@ -75,14 +86,13 @@ class ChirpController
     }
 
     public function insert() {
-        // var_dump($_POST);
-        // var_dump($data);
-
+        
         extract($_POST);
         $formChirp = new Chirp(0, $user, $message, date("Y-m-d H:i:s"));
-        // var_dump($formChirp);
+
         $chirpInserted = $this->chirpRepository->newChirp($formChirp);
 
+        // return view of insertedChirp
         $view = new View("ChirpView.php", ["chirp" => $chirpInserted]);
         $view->render();
 
