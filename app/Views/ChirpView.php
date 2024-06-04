@@ -10,8 +10,12 @@
     <p>Auteur : <?= $chirp->get_author() ?></p>
     <p>Le : <?= Chirp::formatDate($chirp->get_date()) ?> </p>
 
-    <button type="submit" method="POST" action='/chirposphere/public/index.php/chirps/<?= $chirp->get_id()?>'>Supprimer</button>
-    <a href='/chirposphere/public/index.php/chirps/<?= $chirp->get_id()?>'>Modifier</a>
+    <form method='POST' action="/chirposphere/public/index.php/chirps/<?= $chirp->get_id() ?>">
+        <input name="_method" value='DELETE' type='hidden'/>
+        <input type="submit" value="Supprimer" />
+    </form>
+
+    <a href='/chirposphere/public/index.php/chirps/<?= $chirp->get_id()?>/edit'>Modifier</a>
 </article>        
 
 

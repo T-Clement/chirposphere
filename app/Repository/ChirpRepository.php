@@ -44,12 +44,16 @@ class ChirpRepository implements IChirpRepository {
     }
 
 
+    
+
     public function deleteChirp(int $id) : bool {
         $query = $this->db->prepare("DELETE FROM chirp WHERE id = :id");
         return $query->execute([
             "id" => intval($id)
         ]);
     }
+
+
 
     // id à 0 côté vue / controller lors de la soumission du formulaire
     public function newChirp(Chirp $chirp) : Chirp | bool {

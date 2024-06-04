@@ -6,13 +6,18 @@ use Repository\ChirpRepository;
 use Views\View;
 use Models\Chirp;
 
+
+
 class ChirpController
 {
     private $chirpRepository;
+
     public function __construct(ChirpRepository $chirpRepository)
     {
         $this->chirpRepository = $chirpRepository;
     }
+
+
 
     public function index()
     {
@@ -24,15 +29,12 @@ class ChirpController
     }
 
 
+
     public function show($id) 
     {
-
-
         // var_dump($id);
         // var_dump($_SERVER['PHP_SELF']);
-
         // var_dump("Dans la vue ChirpView");
-
 
         $chirp = $this->chirpRepository->getChirp($id);
         // var_dump($chirp);
@@ -41,18 +43,29 @@ class ChirpController
 
     }
 
-    public function create() {
 
+
+    public function create() 
+    {
         var_dump($_REQUEST);
-        
         // $chirp = $this->chirpRepository->newChirp
     }
 
 
-    public function edit(int $id) {
+    public function edit(int $id) 
+    {
         var_dump($id);
         var_dump("On est dans l'edit du " . $id);
     }
 
+
+    public function delete(int $id) 
+    {
+        var_dump($_POST);
+        $chirpDeleted = $this->chirpRepository->deleteChirp($id);
+        header('Location: /chirosphere/public/index.php/chirps');
+        exit();
+
+    }
 
 }

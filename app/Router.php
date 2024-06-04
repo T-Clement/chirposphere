@@ -20,9 +20,18 @@ class Router
 
     public function route()
     {
+        
+        // midlleware to handle DELETE, PUT, INSERT methods send by forms
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['_method'])) {
+            $method = strtoupper($_POST['_method']);
+        } else {
+            $method = $_SERVER['REQUEST_METHOD'];
+        }
+        
         // récupérer la méthode HTTP et l'URI de la requête
-        $method = $_SERVER['REQUEST_METHOD'];
+        // $method = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
+
 
 
 
@@ -41,11 +50,6 @@ class Router
                 $controller = $route['controller'];
                 $action = $route['action'];
 
-                // var_dump($controller);
-                // var_dump($action);
-
-                // var_dump([$controller, $action]);
-
                 // passer les paramètres à la méthode du contrôleur
                 call_user_func_array([$controller, $action], $route['params']);
                 return;
@@ -55,9 +59,6 @@ class Router
         // si aucune route ne correspond, afficher une erreur
         echo "404 - Page not found";
     }
-
-
-
-    
+ 
     
 }
